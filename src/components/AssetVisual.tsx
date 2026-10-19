@@ -15,12 +15,14 @@ type Props = {
 export default function AssetVisual({ src, fallback, alt, className='', grayscale=false, priority=false }: Props) {
   const [failedLocal, setFailedLocal] = useState(false);
   const [failedFallback, setFailedFallback] = useState(false);
-  const url = failedLocal ? (fallback ? publicPath(fallback) : null) : (src ? publicPath(src) : null);
-  if (!url || failedFallback) return (
+  const local = src ? publicPath(src) : null;
+  const remote = fallback ? publicPath(fallback) : null;
+  const url = !failedLocal && local ? local : !failedFallback && remote ? remote : null;
+  if (!url) return (
     <div className={`image-absent ${className}`} role="img" aria-label={alt}>
       <ImageOff size={25} strokeWidth={1.3}/>
       <span>Archival image · source only</span>
     </div>
   );
-  return <img className={`media-image ${grayscale ? 'grayscale' : ''} ${className}`} src={url} alt={alt} loading={priority?'eager':'lazy'} onError={() => failedLocal ? setFailedFallback(true) : setFailedLocal(true)} />;
+  return <img className={`media-image ${grayscale ? 'grayscale' : ''} ${className}`} src={url} alt={alt} loading={priority?'eager':'lazy'} referrerPolicy="no-referrer" onError={() => local && url === local ? setFailedLocal(true) : setFailedFallback(true)} />;
 }

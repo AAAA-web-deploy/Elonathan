@@ -48,3 +48,10 @@
 @media(max-width:900px){.masonry{column-count:2;column-gap:12px}.timeline-image,.timeline-image .image-absent,.timeline-image .media-image{height:240px;min-height:240px;max-height:240px}}
 @media(max-width:560px){.masonry{column-count:1}.meme-card{margin-bottom:12px}.timeline-image,.timeline-image .image-absent,.timeline-image .media-image{height:220px;min-height:220px;max-height:220px}}
 @media(hover:none){.timeline-info,.timeline-image-badge,.meme-card-bottom,.zoom-hint{opacity:1;transform:none}}
+
+.star-trail{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:500}
+@media(pointer:fine){
+  :root,:root *{cursor:url('./cursor-turtle.png') 12 16,auto !important}
+  :root :disabled,:root :disabled *{cursor:not-allowed !important}
+}
+@media(prefers-reduced-motion:reduce){.star-trail{display:none}}

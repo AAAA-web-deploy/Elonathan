@@ -29,8 +29,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /Elonathan
-          NEXT_PUBLIC_SITE_URL: https://aaaa-web-deploy.github.io/Elonathan
+          NEXT_PUBLIC_SITE_URL: https://elonathan.site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
